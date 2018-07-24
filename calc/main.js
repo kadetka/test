@@ -1,5 +1,6 @@
 class Calculator {
     constructor(container_id) {
+        // это надо удалить
         this.resultOperation = this.resultOperation.bind(this);
 
         this.num1 = new Input({
@@ -8,6 +9,9 @@ class Calculator {
             type: 'number',
             placeholder: 'input number a'
         });
+
+        // rename this method
+
         this.num2 = new Input({
             event: {type: 'oninput', callback: this.resultOperation},
             class: 'form-control',
