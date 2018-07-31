@@ -1,0 +1,28 @@
+div.categories{
+    text-align: center;
+    width: 250px;
+    margin-left: 300px;
+}
+h2{
+    font-size: 20px;
+    background: #10707f;
+    color: #f7f7f7;
+    margin: 1px;
+    padding: 5px;
+}
+h3{
+    font-size: 15px;
+    font-weight: normal;
+    background: #f7f7f7;
+    color: black;
+    margin: 0;
+    padding: 3px;
+}
+
+.parent.active + .children{
+    display: block;
+}
+
+.children{
+    display: none;
+}
