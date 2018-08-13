@@ -95,8 +95,14 @@
                 var contentList = document.createElement('ul');
 
                 accordionData[i]['children'].forEach(function (item) {
+
                     var itemList = document.createElement('li');
-                    itemList.textContent = item.name;
+                    var link = document.createElement('a');
+
+                    link.textContent = item.name;
+                    link.href = item.link;
+
+                    itemList.appendChild(link)
                     contentList.appendChild(itemList);
                 });
 
