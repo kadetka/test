@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accordion</title>
+    <style type="text/css">
+        h2 {
+            background-color: #9e39b0;
+            color: #fff;
+            padding: 10px;
+            margin: 0;
+            border-bottom: 3px solid rgba(0, 0, 0, 0.3);
+        }
+
+        h2:hover {
+            background-color: #6844b6;
+        }
+
+        .active h2 {
+            background-color: #6844b6;
+            color: #fff;
+        }
+
+        .content {
+            padding: 20px;
+            margin: 0;
+            border: 1px solid #eee;
+            border-top: 0;
+            color: #929292;
+            background-color: #fff;
+            display: none;
+        }
+
+        .active .content {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Accordion</h1>
+<div id="my-accordion"></div>
+</body>
+<script type="text/javascript">
+
+    var categories = [
+        {
+            name: 'Phones', link: '#', children: [
+                {name: 'Nokia', link: '#', children: []},
+                {name: 'Samsung', link: '#', children: []},
+                {name: 'iPhone', link: '#', children: []},
+                {name: 'LG', link: '#', children: []},
+            ]
+        },
+        {
+            name: 'Laptops', link: '#', children: [
+                {name: 'Asus', link: '#', children: []},
+                {name: 'Samsung', link: '#', children: []},
+                {name: 'Acer', link: '#', children: []},
+                {name: 'DEL', link: '#', children: []},
+            ]
+        }
+    ];
+
+
+    var accordion = {
+        init: function (id, data) {
+            this.accordionElement = document.getElementById(id);
+            this.createAccordion(data);
+            this.toggleAccordion();
+        },
+        createAccordion: function (accordionData) {
+
+            for (var i = 0; i < accordionData.length; i++) {
+
+                var panel = document.createElement('div');
+                var title = document.createElement('h2');
+
+                panel.classList.add('panel');
+                title.textContent = accordionData[i]['name'];
+                panel.appendChild(title);
+
+                this.accordionElement.appendChild(panel);
+            }
+            this.appendContent(accordionData);
+        },
+        appendContent: function (accordionData) {
+
+            var panels = document.getElementsByClassName("panel");
+
+            for (var i = 0; i < panels.length; i++) {
+
+                var content = document.createElement('div');
+                content.classList.add('content');
+                var contentList = document.createElement('ul');
+
+                accordionData[i]['children'].forEach(function (item) {
+                    var itemList = document.createElement('li');
+                    itemList.textContent = item.name;
+                    contentList.appendChild(itemList);
+                });
+
+                content.appendChild(contentList);
+                panels[i].appendChild(content);
+            }
+
+        },
+        toggleAccordion: function () {
+
+            var allPanels = this.accordionElement.querySelectorAll(".panel");
+            var accordionElement = this.accordionElement;
+
+            for (var i = 0; i < allPanels.length; i++) {
+                allPanels[i].addEventListener("click", onPanelClick);
+            }
+
+            function onPanelClick(event) {
+                var expanded = accordionElement.querySelector(".active");
+                var panel = event.currentTarget;
+
+                if (expanded) {
+                    expanded.classList.remove("active");
+                }
+
+                panel.classList.add("active");
+            };
+        }
+    }
+
+    accordion.init('my-accordion', categories);
+
+</script>
+</html>
