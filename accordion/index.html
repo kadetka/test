@@ -121,14 +121,19 @@
             }
 
             function onPanelClick(event) {
+
                 var expanded = accordionElement.querySelector(".active");
                 var panel = event.currentTarget;
 
-                if (expanded) {
-                    expanded.classList.remove("active");
+                // если панель по которой мы кликнули - panel равна панели которая сейчас открыта то удаляем клас актив только у той панели по ктрой кликнули
+                if (expanded === panel) {
+                    panel.classList.remove("active");
+                } else {
+                    if (expanded) {
+                        expanded.classList.remove("active");
+                    }
+                    panel.classList.add("active");
                 }
-
-                panel.classList.add("active");
             };
         }
     }
